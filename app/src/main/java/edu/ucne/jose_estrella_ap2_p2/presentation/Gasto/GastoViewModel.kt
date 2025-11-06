@@ -2,14 +2,17 @@ package edu.ucne.jose_estrella_ap2_p2.presentation.Gasto
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import edu.ucne.jose_estrella_ap2_p2.domain.model.Gasto
 import edu.ucne.jose_estrella_ap2_p2.domain.use_case.GetGastosUseCase
 import edu.ucne.jose_estrella_ap2_p2.domain.use_case.PostGastoUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class GastoViewModel(
+@HiltViewModel
+class GastoViewModel @Inject constructor(
     private val getGastosUseCase: GetGastosUseCase,
     private val postGastoUseCase: PostGastoUseCase
 ) : ViewModel() {
