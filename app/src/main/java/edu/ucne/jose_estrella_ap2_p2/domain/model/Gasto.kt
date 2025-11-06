@@ -1,0 +1,11 @@
+package edu.ucne.jose_estrella_ap2_p2.domain.model
+
+data class Gasto(
+    val gastoId: Int,
+    val fecha: String,
+    val suplidor : String,
+    val ncf: String,
+    val itbis: Double,
+    val monto: Int
+
+)
