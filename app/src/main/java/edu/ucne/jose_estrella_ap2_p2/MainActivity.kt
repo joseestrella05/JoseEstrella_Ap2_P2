@@ -11,20 +11,21 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import edu.ucne.jose_estrella_ap2_p2.presentation.Gasto.GastoScreen
+import edu.ucne.jose_estrella_ap2_p2.presentation.Gasto.GastoViewModel
 import edu.ucne.jose_estrella_ap2_p2.ui.theme.Jose_Estrella_AP2_P2Theme
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
         setContent {
             Jose_Estrella_AP2_P2Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                val viewModel: GastoViewModel = viewModel()
+
+                GastoScreen(viewModel = viewModel)
             }
         }
     }
@@ -41,7 +42,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    Jose_Estrella_AP2_P2Theme {
+    /*Jose_Estrella_AP2_P2Theme {
         Greeting("Android")
-    }
+    }*/
 }
