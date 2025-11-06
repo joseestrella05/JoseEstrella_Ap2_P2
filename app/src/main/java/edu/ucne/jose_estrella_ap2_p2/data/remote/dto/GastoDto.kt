@@ -8,7 +8,7 @@ class GastoDto (
     val suplidor : String,
     val ncf: String,
     val itbis: Double,
-    val monto: Int
+    val monto: Double
 )
 {
     fun toDomain() = Gasto(gastoId,fecha,suplidor,ncf,itbis,monto)

@@ -6,6 +6,6 @@ data class Gasto(
     val suplidor : String,
     val ncf: String,
     val itbis: Double,
-    val monto: Int
+    val monto: Double
 
 )
