@@ -12,11 +12,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 import edu.ucne.jose_estrella_ap2_p2.presentation.Gasto.GastoScreen
 import edu.ucne.jose_estrella_ap2_p2.presentation.Gasto.GastoViewModel
 import edu.ucne.jose_estrella_ap2_p2.ui.theme.Jose_Estrella_AP2_P2Theme
 
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,18 +33,3 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    /*Jose_Estrella_AP2_P2Theme {
-        Greeting("Android")
-    }*/
-}
