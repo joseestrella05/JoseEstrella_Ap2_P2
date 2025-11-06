@@ -20,7 +20,8 @@ fun GastoScreen(viewModel: GastoViewModel) {
     val mensaje by viewModel.mensaje.collectAsState()
 
     val scope = rememberCoroutineScope()
-    val bottomSheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
+    val bottomSheetState =
+        rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
 
     var suplidor by remember { mutableStateOf("") }
     var ncf by remember { mutableStateOf("") }
@@ -34,9 +35,11 @@ fun GastoScreen(viewModel: GastoViewModel) {
     ModalBottomSheetLayout(
         sheetState = bottomSheetState,
         sheetContent = {
-            Column(modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
 
                 Text("Nuevo Gasto", style = MaterialTheme.typography.h6)
 
@@ -78,7 +81,7 @@ fun GastoScreen(viewModel: GastoViewModel) {
                             suplidor = suplidor,
                             ncf = ncf,
                             itbis = itbis.toDoubleOrNull() ?: 0.0,
-                            monto = monto.toIntOrNull() ?: 0
+                            monto = monto.toDoubleOrNull() ?: 0.0
                         )
                         viewModel.enviarGasto(nuevo)
 
@@ -100,15 +103,18 @@ fun GastoScreen(viewModel: GastoViewModel) {
             floatingActionButton = {
                 FloatingActionButton(onClick = {
                     scope.launch { bottomSheetState.show() }
-                }) {
+                }, backgroundColor = MaterialTheme.colors.primary
+                ) {
                     Icon(Icons.Default.Add, contentDescription = "Agregar Gasto")
                 }
             }
         ) { padding ->
-            Column(modifier = Modifier
-                .padding(padding)
-                .padding(16.dp)
-                .fillMaxSize()) {
+            Column(
+                modifier = Modifier
+                    .padding(padding)
+                    .padding(16.dp)
+                    .fillMaxSize()
+            ) {
 
                 Text("Lista de Gastos", style = MaterialTheme.typography.h6)
 
