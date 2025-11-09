@@ -6,6 +6,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import edu.ucne.jose_estrella_ap2_p2.domain.model.Gasto
 import edu.ucne.jose_estrella_ap2_p2.domain.use_case.GetGastosUseCase
 import edu.ucne.jose_estrella_ap2_p2.domain.use_case.PostGastoUseCase
+import edu.ucne.jose_estrella_ap2_p2.domain.use_case.UpdateGastoUseCase
+import edu.ucne.jose_estrella_ap2_p2.domain.use_case.GetGastoByIdUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -14,7 +16,9 @@ import javax.inject.Inject
 @HiltViewModel
 class GastoViewModel @Inject constructor(
     private val getGastosUseCase: GetGastosUseCase,
-    private val postGastoUseCase: PostGastoUseCase
+    private val postGastoUseCase: PostGastoUseCase,
+    private val getGastoByIdUseCase: GetGastoByIdUseCase,
+    private val updateGastoUseCase: UpdateGastoUseCase
 ) : ViewModel() {
 
     private val _gastos = MutableStateFlow<List<Gasto>>(emptyList())
@@ -22,6 +26,10 @@ class GastoViewModel @Inject constructor(
 
     private val _mensaje = MutableStateFlow<String?>(null)
     val mensaje: StateFlow<String?> = _mensaje
+
+    private val _gastoEncontrado = MutableStateFlow<Gasto?>(null)
+    val gastoEncontrado: StateFlow<Gasto?> = _gastoEncontrado
+
 
     fun cargarGastos() {
         viewModelScope.launch {
@@ -43,4 +51,30 @@ class GastoViewModel @Inject constructor(
             }
         }
     }
+    fun obtenerGasto(id: Int) {
+        viewModelScope.launch {
+            try {
+                val gasto = getGastoByIdUseCase(id)
+                _gastoEncontrado.value = gasto
+            } catch (e: Exception) {
+                _mensaje.value = "Error al buscar gasto: ${e.message}"
+                _gastoEncontrado.value = null
+            }
+        }
+    }
+    fun actualizarGasto(id: Int, gasto: Gasto) {
+        viewModelScope.launch {
+            try {
+                updateGastoUseCase(id, gasto)
+                cargarGastos()
+            } catch (e: Exception) {
+                _mensaje.value = "Error al actualizar: ${e.message}"
+            }
+        }
+    }
+
+    fun limpiarGastoEncontrado() {
+        _gastoEncontrado.value = null
+    }
+
 }
