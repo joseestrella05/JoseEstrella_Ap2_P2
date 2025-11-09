@@ -13,4 +13,11 @@ class GastoRepositoryImpl(private  val api: GastoApiServices) : GastoRepository{
     override suspend fun postGasto(gasto: Gasto) {
         api.postGasto(gasto.toDto())
     }
+    override suspend fun getGastoById(id: Int): Gasto {
+        return api.getGastoById(id).toDomain()
+    }
+
+    override suspend fun updateGasto(id: Int, gasto: Gasto) {
+        api.putGasto(id, gasto.toDto())
+    }
 }
