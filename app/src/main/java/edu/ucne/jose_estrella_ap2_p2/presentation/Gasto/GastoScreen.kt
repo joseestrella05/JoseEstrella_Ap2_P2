@@ -33,7 +33,8 @@ fun GastoScreen(viewModel: GastoViewModel) {
     val gastoEncontrado by viewModel.gastoEncontrado.collectAsState()
 
     val scope = rememberCoroutineScope()
-    val bottomSheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
+    val bottomSheetState =
+        rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
 
     var modoEdicion by rememberSaveable { mutableStateOf(false) }
     var gastoEditandoId by rememberSaveable { mutableStateOf(0) }
@@ -58,9 +59,11 @@ fun GastoScreen(viewModel: GastoViewModel) {
     ModalBottomSheetLayout(
         sheetState = bottomSheetState,
         sheetContent = {
-            Column(modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
 
                 Text(
                     text = if (modoEdicion) "Editar Gasto" else "Nuevo Gasto",
